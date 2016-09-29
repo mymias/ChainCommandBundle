@@ -30,10 +30,10 @@ class ProcessTerminateTest extends \PHPUnit_Framework_TestCase
         $this->expectException('Symfony\Component\Console\Exception\CommandNotFoundException');
 
         $application = $this->createMock(Application::class);
-        $application->method('find')->will($this->throwException(new CommandNotFoundException()));
+        $application->method('find')->will($this->throwException(new CommandNotFoundException('Command not found')));
 
         $command = $this->createMock(Command::class);
-        $command->method('getName')->willReturn('non:exists:command');
+        $command->method('getName')->willReturn('first:command.name');
         $command->method('getApplication')->willReturn($application);
 
         $event = $this->createMock(ConsoleTerminateEvent::class);

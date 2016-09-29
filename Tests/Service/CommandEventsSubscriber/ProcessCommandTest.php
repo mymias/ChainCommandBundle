@@ -43,7 +43,7 @@ class ProcessCommandTest extends \PHPUnit_Framework_TestCase
         $result = $this->commandSubscriber->processCommand($event);
 
         $expected = sprintf(sprintf(
-            "Error: %s command is a member of %s command chain and cannot be executed on its own.",
+            "Error: %s command is a member of %s command chain and cannot be executed on its own.\n",
             $childCommandName,
             $this->firstCommandName
         ));
