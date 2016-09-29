@@ -1,0 +1,14 @@
+services:
+
+    # command chains holder
+    oro_chain_command.registry:
+        class: Oro\ChainCommandBundle\Service\CommandChainsRegistry
+
+    # command chains processor
+    oro_chain_command.processor:
+        class: Oro\ChainCommandBundle\Service\CommandEventsSubscriber
+        arguments:
+            - "@oro_chain_command.registry"
+            - "@=container.has('logger') ? service('logger') : null"
+        tags:
+            - { name: kernel.event_subscriber }
