@@ -1,5 +1,5 @@
 {
-    "name": "namnam/oro-chain-command-bundle",
+    "name": "namnam/chain-command-bundle",
     "description": "Symfony bundle that implements command chaining functionality.",
     "type": "symfony-bundle",
     "homepage": "https://bitbucket.org/NAMnam/chaincommandbundle",
