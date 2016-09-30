@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Service;
+namespace Nimias\ChainCommandBundle\Service;
 
-use Oro\ChainCommandBundle\Exception\CommandChainCollisionException;
+use Nimias\ChainCommandBundle\Exception\CommandChainCollisionException;
 
 /**
  * Command chains registry

@@ -1,8 +1,8 @@
 {
-    "name": "namnam/chain-command-bundle",
+    "name": "nimias/chain-command-bundle",
     "description": "Symfony bundle that implements command chaining functionality.",
     "type": "symfony-bundle",
-    "homepage": "https://bitbucket.org/NAMnam/chaincommandbundle",
+    "homepage": "https://github.com/NiMias/ChainCommandBundle",
     "license": "MIT",
     "authors": [
         {
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Oro\\ChainCommandBundle\\": ""
+            "NAMnam\\ChainCommandBundle\\": ""
         }
     }
 }

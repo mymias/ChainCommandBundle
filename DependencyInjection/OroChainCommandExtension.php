@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\DependencyInjection;
+namespace Nimias\ChainCommandBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -17,14 +17,14 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages configuration for OroChainCommandBundle.
+ * This is the class that loads and manages configuration for NimiasChainCommandBundle.
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class OroChainCommandExtension extends Extension
+class NimiasChainCommandExtension extends Extension
 {
     /**
-     * Loads and process OroChainCommandBundle configuration from section "oro_chain_command" in config files.
+     * Loads and process NimiasChainCommandBundle configuration from section "nimias_chain_command" in config files.
      *
      * @param array            $configs   An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
@@ -38,12 +38,11 @@ class OroChainCommandExtension extends Extension
 
         // For testing purpose create service, that holds this bundle configuration
         if('test' === $container->getParameter('kernel.environment')) {
-            $configHolderServiceDefinition = new Definition('Oro\ChainCommandBundle\Service\BundleConfigHolder');
-            $configHolderServiceDefinition->addMethodCall('setConfig', $config);
-            $container->setDefinition(
-                'oro_chain_command.config_holder',
-                $configHolderServiceDefinition
+            $configHolderServiceDefinition = $container->register(
+                'nimias_chain_command.config_holder',
+                'Nimias\\ChainCommandBundle\\Service\\BundleConfigHolder'
             );
+            $configHolderServiceDefinition->addArgument($config);
         }
 
         // Load predefined bundle services
@@ -52,17 +51,17 @@ class OroChainCommandExtension extends Extension
 
         // Process bundle configuration
 
-            // If logging enabled
+        // If logging enabled
         if($this->isConfigEnabled($container, $config['logging'])) {
             // Switch on logging in main bundle service
-            $definition = $container->getDefinition('oro_chain_command.processor');
+            $definition = $container->getDefinition('nimias_chain_command.processor');
             $definition->addMethodCall('setLoggingEnabled', [true]);
         }
 
-            // If set up command chains in config
+        // If set up command chains in config
         if(!empty($config['command_chains'])) {
             // Fill up command chains registry service
-            $definition = $container->getDefinition('oro_chain_command.registry');
+            $definition = $container->getDefinition('nimias_chain_command.registry');
 
             foreach($config['command_chains'] as $mainCommandName => $childrenCommands) {
 

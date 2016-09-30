@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Service;
+namespace Nimias\ChainCommandBundle\Service;
 
 /**
  * Holder of bundle configuration
  *
  * Used in test environment for testing purpose.
  *
- * @See \Oro\ChainCommandBundle\DependencyInjection\OroChainCommandExtension::load
- * @See \Oro\ChainCommandBundle\Features\Context\FeatureContext::commandRegisteredInConfigFileAsMemberOfChainForCommandWithParams
+ * @See \Nimias\ChainCommandBundle\DependencyInjection\OroChainCommandExtension::load
+ * @See \Nimias\ChainCommandBundle\Features\Context\FeatureContext::commandRegisteredInConfigFileAsMemberOfChainForCommandWithParams
  */
 class BundleConfigHolder
 {
@@ -25,7 +25,7 @@ class BundleConfigHolder
     /**
      * @param array $config
      */
-    public function setConfig(array $config)
+    public function __construct(array $config)
     {
         $this->config = $config;
     }

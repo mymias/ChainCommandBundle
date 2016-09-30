@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle;
+namespace Nimias\ChainCommandBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * OroChainCommandBundle bundle class
+ * NimiasCommandBundle bundle class
  */
-class OroChainCommandBundle extends Bundle
+class NimiasChainCommandBundle extends Bundle
 {
 }

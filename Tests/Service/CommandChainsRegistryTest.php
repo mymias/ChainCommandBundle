@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Tests\Service;
+namespace Nimias\ChainCommandBundle\Tests\Service;
 
-use Oro\ChainCommandBundle\Service\CommandChainsRegistry;
+use Nimias\ChainCommandBundle\Service\CommandChainsRegistry;
 
 /**
  * Test class for CommandChainsRegistry service
  *
- * @See \Oro\ChainCommandBundle\Service\CommandChainsRegistry
+ * @See \Nimias\ChainCommandBundle\Service\CommandChainsRegistry
  */
 class CommandChainsRegistryTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,7 +34,7 @@ class CommandChainsRegistryTest extends \PHPUnit_Framework_TestCase
         // It should not take the main command, that already set up as child command
     public function test_It_Should_Not_Take_Main_Command_That_Already_Set_Up_As_Child()
     {
-        $this->expectException('\Oro\ChainCommandBundle\Exception\CommandChainCollisionException');
+        $this->expectException('\Nimias\ChainCommandBundle\Exception\CommandChainCollisionException');
 
         $mainCommandName = 'dfadfd.adfadf';
         $someAnotherMainCommandName = 'akghalkhg.adsfaihg';
@@ -50,7 +50,7 @@ class CommandChainsRegistryTest extends \PHPUnit_Framework_TestCase
         // It should not take child commands, that already set up as main commands
     public function test_It_Should_Not_Take_Child_Commands_That_Already_Set_Up_As_Main()
     {
-        $this->expectException('\Oro\ChainCommandBundle\Exception\CommandChainCollisionException');
+        $this->expectException('\Nimias\ChainCommandBundle\Exception\CommandChainCollisionException');
 
         $mainCommandName = 'dfadfd.adfadf';
         $childCommandName = 'fadggkjakdglhgl.asdhaighaoigh';

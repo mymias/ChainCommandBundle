@@ -1,7 +1,7 @@
-OroChainCommandBundle
+NimiasChainCommandBundle
 ######################
 
-OroChainCommandBundle provides functionality:
+NimiasChainCommandBundle provides functionality:
 
 * Any Symfony bundle in the application could register their console commands to be members of some command chain.
 * When a user runs the main command in a chain, all other commands registered in this chain should be executed as well.
@@ -17,12 +17,12 @@ There are two methods to create command chine:
 
 Static (in config file)
 -------------------------------
-Create configuration section named "oro_chain_command" and fill it as in example:
+Create configuration section named "nimias_chain_command" and fill it as in example:
 
 .. code-block:: yaml
 
-    # OroChainCommandBundle Configuration
-    oro_chain_command:
+    # NimiasChainCommandBundle Configuration
+    nimias_chain_command:
         logging:
             enabled:  true        # true by default
         command_chains:
@@ -42,7 +42,7 @@ Create configuration section named "oro_chain_command" and fill it as in example
 Dynamic (using service container)
 -----------------------------------------
 
-Get service ``oro_chain_command.registry`` from container and use its method ``addSubCommandToChain`` to create a new command
+Get service ``nimias_chain_command.registry`` from container and use its method ``addSubCommandToChain`` to create a new command
 chain or add new command in existing chain.
 
 For example:
@@ -53,7 +53,7 @@ For example:
 
     namespace Your\BundleName\Service;
 
-    use Oro\ChainCommandBundle\Service\CommandChainsRegistry;
+    use Nimias\ChainCommandBundle\Service\CommandChainsRegistry;
 
     class SomeService
     {
@@ -70,4 +70,4 @@ For example:
 
 .. note::
 
-    Also, as you see in ``oro_chain_command`` config example, you can turn on/off logging for command chain execution.
+    Also, as you see in ``nimias_chain_command`` config example, you can turn on/off logging for command chain execution.

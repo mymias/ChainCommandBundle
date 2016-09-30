@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Tests\Service\CommandEventsSubscriber;
+namespace Nimias\ChainCommandBundle\Tests\Service\CommandEventsSubscriber;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 /**
  * Tests for CommandEventsSubscriber::processCommand() method
  *
- * @See \Oro\ChainCommandBundle\Service\CommandEventsSubscriber::processCommand
+ * @See \Nimias\ChainCommandBundle\Service\CommandEventsSubscriber::processCommand
  */
 class ProcessCommandTest extends \PHPUnit_Framework_TestCase
 {

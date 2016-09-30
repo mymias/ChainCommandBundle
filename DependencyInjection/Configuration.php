@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\DependencyInjection;
+namespace Nimias\ChainCommandBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,12 +21,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * Generates the configuration tree builder for "oro_chain_command" section
+     * Generates the configuration tree builder for "nimias_chain_command" section
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('oro_chain_command');
+        $rootNode = $treeBuilder->root('nimias_chain_command');
 
         $rootNode
             ->children()
@@ -34,8 +34,11 @@ class Configuration implements ConfigurationInterface
                     ->canBeDisabled()
                 ->end()
                 ->arrayNode('command_chains')
+                    ->normalizeKeys(false)
                     ->prototype('array')                    // main commands - keys of arrays
+                        ->normalizeKeys(false)
                         ->prototype('array')                // children commands - keys of children array
+                            ->normalizeKeys(false)
                             ->children()
                                 ->integerNode('priority')   // priority param is required
                                     ->defaultValue(10)

@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,13 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Service;
+namespace Nimias\ChainCommandBundle\Service;
 
+use Nimias\ChainCommandBundle\Helper\OutputBufferHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Console\ConsoleEvents;
 
@@ -50,6 +52,7 @@ class CommandEventsSubscriber implements EventSubscriberInterface
     {
         $this->chainsRegistry = $chainsRegistry;
         $this->logger = $logger;
+        stream_filter_register('console_output_buffer_filter', '\Nimias\ChainCommandBundle\Helper\ConsoleOutputFilterHelper');
     }
 
     /**
@@ -79,12 +82,12 @@ class CommandEventsSubscriber implements EventSubscriberInterface
     {
         $command = $event->getCommand();
         $requestedCommandName = $command->getName();
+        $output = $event->getOutput();
 
         // Check if given command registered as child and has parent command
         $parentCommandName = $this->chainsRegistry->getParentCommandName($command->getName());
 
         if($parentCommandName) {
-            $output = $event->getOutput();
             $output->writeln(sprintf(
                 "Error: %s command is a member of %s command chain and cannot be executed on its own.",
                 $requestedCommandName,
@@ -95,10 +98,15 @@ class CommandEventsSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if($this->isLoggingEnabled) {
-            $childrenCommandsChain = $this->chainsRegistry->getCommandChain($requestedCommandName);
+        $childrenCommandsChain = $this->chainsRegistry->getCommandChain($requestedCommandName);
 
-            if(!empty($childrenCommandsChain)) {
+        if(!empty($childrenCommandsChain)) {
+
+            if($output instanceof StreamOutput) {
+                stream_filter_append($output->getStream(), 'console_output_buffer_filter', STREAM_FILTER_WRITE);
+            }
+
+            if($this->isLoggingEnabled) {
 
                 $this->logger->info(sprintf(
                     '%s is a master command of a command chain that has registered member commands',
@@ -129,6 +137,8 @@ class CommandEventsSubscriber implements EventSubscriberInterface
      * Executes registered child commands after execution of main command
      *
      * @param ConsoleTerminateEvent $event
+     *
+     * @throws \Exception
      */
     public function processTerminate(ConsoleTerminateEvent $event)
     {
@@ -143,6 +153,9 @@ class CommandEventsSubscriber implements EventSubscriberInterface
             $application = $command->getApplication();
 
             if($this->isLoggingEnabled) {
+                // Log main-command output
+                $this->logger->info(OutputBufferHelper::fetch());
+                // Log start of executing child commands
                 $this->logger->info(sprintf(
                     'Executing %s chain members:',
                     $requestedCommandName
@@ -155,17 +168,25 @@ class CommandEventsSubscriber implements EventSubscriberInterface
                 foreach($childrenCommands as $childCommandName => $args) {
 
                     try {
-                        $childCommand = $application->find($childCommandName);
-                        $childInput = new ArrayInput($args);
-                        $childReturnCode = $childCommand->run($childInput, $output);
-                    } catch (CommandNotFoundException $exception) {
 
                         if($this->isLoggingEnabled) {
-                            $this->logger->error(sprintf(
-                                'Error: %s command not found. %s',
-                                $childCommandName,
-                                $exception->getMessage()
-                            ));
+                            // Log child command start
+                            $this->logger->info(sprintf('Executing %s command:', $childCommandName));
+                        }
+
+                        $childCommand = $application->get($childCommandName);
+                        $childInput = new ArrayInput($args);
+                        $childReturnCode = $childCommand->run($childInput, $output);
+
+                        if($this->isLoggingEnabled) {
+                            // Log child command output
+                            $this->logger->info(OutputBufferHelper::fetch());
+                        }
+
+                    } catch (\Exception $exception) {
+
+                        if($this->isLoggingEnabled) {
+                            $this->logger->error($exception->getMessage());
                         }
 
                         throw $exception;

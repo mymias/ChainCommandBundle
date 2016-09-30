@@ -1,6 +1,6 @@
-# OroChainCommandBundle
+# NimiasChainCommandBundle
 
-OroChainCommandBundle is a Symfony bundle that implements command chaining functionality.
+NimiasChainCommandBundle is a Symfony bundle that implements command chaining functionality.
 
 Other Symfony bundles in the application could register their console commands to be members of a command chain.
 
@@ -39,7 +39,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new Oro\ChainCommandBundle\OroChainCommandBundle(),
+            new Nimias\ChainCommandBundle\NimiasChainCommandBundle(),
         );
 
         // ...

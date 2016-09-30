@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Exception;
+namespace Nimias\ChainCommandBundle\Exception;
 
 /**
  * Exception for adding new command chain members validation process
  *
- * @See \Oro\ChainCommandBundle\Service\CommandChainsRegistry::validate
+ * @See \Nimias\ChainCommandBundle\Service\CommandChainsRegistry::validate
  */
 class CommandChainCollisionException extends \Exception
 {}

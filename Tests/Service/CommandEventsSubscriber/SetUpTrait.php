@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the OroChainCommandBundle package.
+ * This file is part of the NimiasChainCommandBundle package.
  *
  * (c) Mykolay Miasnikov <mykolmias@gmail.com>
  *
@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Oro\ChainCommandBundle\Tests\Service\CommandEventsSubscriber;
+namespace Nimias\ChainCommandBundle\Tests\Service\CommandEventsSubscriber;
 
-use Oro\ChainCommandBundle\Service\CommandChainsRegistry;
-use Oro\ChainCommandBundle\Service\CommandEventsSubscriber;
+use Nimias\ChainCommandBundle\Service\CommandChainsRegistry;
+use Nimias\ChainCommandBundle\Service\CommandEventsSubscriber;
 use Psr\Log\LoggerInterface;
 
 /**
  * SetUp trait for CommandEventsSubscriber test classes
  *
- * @See \Oro\ChainCommandBundle\Tests\Service\CommandEventsSubscriber\ProcessCommandTest
- * @See \Oro\ChainCommandBundle\Tests\Service\CommandEventsSubscriber\ProcessTerminateTest
+ * @See \Nimias\ChainCommandBundle\Tests\Service\CommandEventsSubscriber\ProcessCommandTest
+ * @See \Nimias\ChainCommandBundle\Tests\Service\CommandEventsSubscriber\ProcessTerminateTest
  */
 trait SetUpTrait {
     /**
