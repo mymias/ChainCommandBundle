@@ -19,5 +19,5 @@ use Nimias\ChainCommandBundle\Helper\OutputBufferHelper;
  *
  * @Todo Implement \Nimias\ChainCommandBundle\Tests\Helper\OutputBufferHelperTest tests
  */
-class OutputBufferHelperTest extends PHPUnit_Framework_TestCase
+class OutputBufferHelperTest extends \PHPUnit_Framework_TestCase
 {}
