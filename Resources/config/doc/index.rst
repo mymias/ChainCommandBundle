@@ -24,18 +24,21 @@ Create configuration section named "nimias_chain_command" and fill it as in exam
     # NimiasChainCommandBundle Configuration
     nimias_chain_command:
         logging:
-            enabled:  true        # true by default
+            enabled:  true          # true by default
         command_chains:
-            server:status:        # main command name
-                bar:first-test:   # child command name
-                    priority: 10  # priority. Required param. Can be > 0 and < 1000000
-                bar:second-test:
-                    priority: 10
-                    argument: 'string_value'
-            foo:second-test:
+            server:status:          # main command name
+                foo:hello:          # child command name
+                    priority: 15    # priority. Required param for every child command. Can be > 0 and < 1000000
+                    "--score": 5    # Long-named option
+                bar:hi:
+                    priority: 17
+                    "-f": "Mike"    # Short-named option
+                    "--male": ~     # Option with no value (php bin/console bar:hi --male)
+                    somearg: 'test value'   # Argument for child command
+            help:                 # console command (bin/console help)
                 bar:second-test:
                     priority: 100
-                    argument: 'another_value'
+                    "--someopt": 'test text'
 
 
 
