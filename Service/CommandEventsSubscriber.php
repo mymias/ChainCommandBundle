@@ -98,14 +98,17 @@ class CommandEventsSubscriber implements EventSubscriberInterface
             return;
         }
 
+        // Check if it's a main command in some registered chain
         $childrenCommandsChain = $this->chainsRegistry->getCommandChain($requestedCommandName);
 
         if(!empty($childrenCommandsChain)) {
 
+            // Copy console command output to additional buffer for logging later
             if($output instanceof StreamOutput) {
                 stream_filter_append($output->getStream(), 'console_output_buffer_filter', STREAM_FILTER_WRITE);
             }
 
+            // Log some info
             if($this->isLoggingEnabled) {
 
                 $this->logger->info(sprintf(
@@ -152,6 +155,7 @@ class CommandEventsSubscriber implements EventSubscriberInterface
             $output = $event->getOutput();
             $application = $command->getApplication();
 
+            // Log some info
             if($this->isLoggingEnabled) {
                 // Log main-command output
                 $this->logger->info(OutputBufferHelper::fetch());
@@ -168,23 +172,23 @@ class CommandEventsSubscriber implements EventSubscriberInterface
                 foreach($childrenCommands as $childCommandName => $args) {
 
                     try {
-
+                        // Log child command start
                         if($this->isLoggingEnabled) {
-                            // Log child command start
                             $this->logger->info(sprintf('Executing %s command:', $childCommandName));
                         }
 
+                        // Execute child command
                         $childCommand = $application->get($childCommandName);
                         $childInput = new ArrayInput($args);
                         $childReturnCode = $childCommand->run($childInput, $output);
 
+                        // Log child command output
                         if($this->isLoggingEnabled) {
-                            // Log child command output
                             $this->logger->info(OutputBufferHelper::fetch());
                         }
 
                     } catch (\Exception $exception) {
-
+                        // Log error message
                         if($this->isLoggingEnabled) {
                             $this->logger->error($exception->getMessage());
                         }
@@ -194,6 +198,7 @@ class CommandEventsSubscriber implements EventSubscriberInterface
                 }
             }
 
+            // Log some info
             if($this->isLoggingEnabled) {
                 $this->logger->info(sprintf(
                     'Execution of %s chain completed.',

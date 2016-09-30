@@ -58,7 +58,7 @@ class NimiasChainCommandExtension extends Extension
             $definition->addMethodCall('setLoggingEnabled', [true]);
         }
 
-        // If set up command chains in config
+        // If were set up command chains in config
         if(!empty($config['command_chains'])) {
             // Fill up command chains registry service
             $definition = $container->getDefinition('nimias_chain_command.registry');
