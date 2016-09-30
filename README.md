@@ -53,3 +53,9 @@ How to use
 -------------------------
 
 Please, see [documentation](Resources/doc/index.rst).
+
+ToDo
+--------------------------
+* Implement tests for \Nimias\ChainCommandBundle\Helper\ConsoleOutputFilterHelper
+* Implement tests for \Nimias\ChainCommandBundle\Helper\OutputBufferHelper
+* Implement skiped tests in \Nimias\ChainCommandBundle\Tests\Service\CommandEventsSubscriber\ProcessTerminateTest class.

@@ -42,25 +42,41 @@ class ProcessTerminateTest extends \PHPUnit_Framework_TestCase
         $result = $this->commandSubscriber->processTerminate($event);
     }
 
-    // Test it should throw Exception when missing a required parameter for child command
+    /**
+     * Test it should throw Exception when missing a required parameter for child command
+     *
+     * @Todo Implement ProcessTerminateTest::testItShouldThrowExceptionWhenMissingARequiredParameterForChildCommand
+     */
     public function testItShouldThrowExceptionWhenMissingARequiredParameterForChildCommand()
     {
         $this->markTestSkipped();
     }
 
-    // Test it should display correct output for correctly formed chain of commands
+    /**
+     * Test it should display correct output for correctly formed chain of commands
+     *
+     * @Todo Implement ProcessTerminateTest::testItShouldDisplayCorrectOutputForCorrectlyFormedChainOfCommands
+     */
     public function testItShouldDisplayCorrectOutputForCorrectlyFormedChainOfCommands()
     {
         $this->markTestSkipped();
     }
 
-    // Test it should correctly log when logging is enabled
+    /**
+     * Test it should correctly log when logging is enabled
+     *
+     * @Todo Implement ProcessTerminateTest::testItShouldCorrectlyLogWhenLoggingIsEnabled
+     */
     public function testItShouldCorrectlyLogWhenLoggingIsEnabled()
     {
         $this->markTestSkipped();
     }
 
-    // Test it should not log where logging is disabled
+    /**
+     * Test it should not log where logging is disabled
+     *
+     * @Todo Implement ProcessTerminateTest::testItShouldNotLogWhenLoggingIsDisabled
+     */
     public function testItShouldNotLogWhenLoggingIsDisabled()
     {
         $this->markTestSkipped();
