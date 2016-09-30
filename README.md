@@ -15,7 +15,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-$ composer require namnam/oro-chain-command-bundle
+$ composer require nimias/chain-command-bundle
 ```
 
 This command requires you to have Composer installed globally, as explained
